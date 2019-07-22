@@ -1,0 +1,93 @@
+<html>
+<head>
+	<title>WORDSTACK~!</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color: #adebf6;overflow: hidden;">
+	<div class="container-fluid" style="overflow: hidden;">
+		<div style="width: 100%;height: 100px;">
+			<div style="float:left;font-size: 4rem;color:white;">WORDSTACK</div>
+			<div style="float:right;font-size:4rem;color:#7fcbda;">#불매운동</div>
+		</div>
+		<canvas id="word_cloud" style="margin:0px;" id=canvas></canvas>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/assets/js/wordcloud2.js"></script>
+<script type="text/javascript">
+	
+
+
+	window.onload=init();
+
+	function init(){
+		canvas_init();
+		wc_init();
+		//chgbgc();
+		
+		
+	}
+
+	function chgbgc(){
+		var canvas=document.getElementById('word_cloud');
+		var ctx=canvas.getContext('2d');
+		var my_gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+		my_gradient.addColorStop(0, '#518d97');
+		my_gradient.addColorStop(1, '#627488');
+		ctx.fillStyle = my_gradient;
+		ctx.fillRect(0,0,canvas.width,canvas.height);
+
+	}
+
+	function canvas_init(){
+		var canvas=document.getElementById('word_cloud');
+		canvas.width=window.innerWidth;
+		canvas.height=window.innerHeight;
+	}
+
+	function wc_init(){
+		if(!WordCloud.isSupported){
+			alert('fuck');return;
+		}
+		var list=[];
+		list.push(['오수진',200]);
+		list.push(['이정헌',30]);
+		list.push(['오수진',15]);
+		list.push(['이정헌',3]);
+		list.push(['이정헌',4]);
+		list.push(['이정헌',20]);
+		list.push(['이정헌',90]);
+		list.push(['이정헌',90]);
+		list.push(['오수진',90]);
+		list.push(['이정헌',90]);
+		list.push(['오수진',90]);
+		list.push(['이정헌',100]);
+		list.push(['오수진',66]);
+		list.push(['이정헌',77]);
+		list.push(['오수진',99]);
+		list.push(['이정헌',250]);
+		list.push(['이정헌',320]);
+		list.push(['오수진',180]);
+		WordCloud(document.getElementById('word_cloud'),
+			{
+				list:list,
+				color:()=>{
+					var c=['#7fcbda','#ffc364','#e27a58','#ffffff'];
+					var idx=Math.floor(Math.random()*c.length);
+					return c[idx];
+				},
+				backgroundColor:'#adebf6',
+				minSize:30,
+				click:(item)=>{
+					location.href='/list';
+				},
+			});
+	}
+
+
+
+
+</script>
+</html>
